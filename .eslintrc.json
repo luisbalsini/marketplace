@@ -22,12 +22,9 @@
   },
   "plugins": ["react", "react-native", "prettier", "simple-import-sort"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ],
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
     "react/react-in-jsx-scope": "off",
     //ajustar para não passar erros com react-anvigation
     "react/prop-types": ["error", { "ignore": ["navigation", "navigate "] }],
