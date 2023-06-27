@@ -1,10 +1,10 @@
 import { Text, SafeAreaView } from 'react-native';
 import React from 'react';
 
-const App = () => {
+const App = ({ x }: any) => {
   return (
     <SafeAreaView>
-      <Text>Testando</Text>
+      <Text>Testando {x}</Text>
     </SafeAreaView>
   );
 };
