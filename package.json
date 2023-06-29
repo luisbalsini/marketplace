@@ -14,7 +14,8 @@
   "dependencies": {
     "@react-native-community/cli-doctor": "^11.3.3",
     "react": "18.2.0",
-    "react-native": "0.72.0"
+    "react-native": "0.72.0",
+    "styled-components": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -26,6 +27,7 @@
     "@types/metro-config": "^0.76.3",
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/styled-components-react-native": "^5.2.1",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "babel-jest": "^29.2.1",
