@@ -1,6 +1,9 @@
 import React from 'react';
 import { ContainerButtom } from './buttom.style';
-import { Text, TouchableOpacityProps } from 'react-native';
+import { TouchableOpacityProps } from 'react-native';
+import Text from '../text/text';
+import { theme } from '../../themes/theme';
+import { textTypes } from '../text/textTypes';
 
 interface ButtomProps extends TouchableOpacityProps {
   title: string;
@@ -10,7 +13,7 @@ interface ButtomProps extends TouchableOpacityProps {
 const Button = ({ title, margin, ...props }: ButtomProps) => {
   return (
     <ContainerButtom margin={margin} {...props}>
-      <Text>{title}</Text>
+      <Text color={theme.colors.neutralTheme.write}>{title}</Text>
     </ContainerButtom>
   );
 };
