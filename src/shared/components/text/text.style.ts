@@ -11,4 +11,5 @@ export const ContainerText = styled.Text<ContainerTextProps>`
 
   font-family: ${(props: any) => props.fontFamily};
   font-size: ${(props: any) => props.fontSize};
+  padding-top: 3px;
 `;

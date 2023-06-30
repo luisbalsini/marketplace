@@ -1,5 +1,11 @@
 import React from 'react';
-import { ButtonSecondary, ContainerButtom, GradientButton } from './buttom.style';
+import {
+  ButtonSecondary,
+  ContainerButtom,
+  GradientButton,
+  ActivityIndicatorButton,
+  ButtonDisabled,
+} from './buttom.style';
 import { TouchableOpacityProps } from 'react-native';
 import Text from '../text/text';
 import { theme } from '../../themes/theme';
@@ -9,30 +15,52 @@ interface ButtomProps extends TouchableOpacityProps {
   title: string;
   margin?: string;
   type?: string;
+  disabled?: boolean;
+  loading?: boolean;
+  onPress?: () => void;
 }
 
-const Button = ({ title, margin, type, ...props }: ButtomProps) => {
+const Button = ({ title, margin, type, disabled, loading, onPress, ...props }: ButtomProps) => {
+  const handleOnPress = () => {
+    if (!loading && !disabled && onPress) {
+      onPress();
+    }
+  };
+
+  const renderText = (color: string) => (
+    <>
+      <Text type={textTypes.BUTTON_LIGHT} color={color}>
+        {title}
+      </Text>
+      {loading && <ActivityIndicatorButton color={theme.colors.neutralTheme.write} />}
+    </>
+  );
+
+  if (disabled) {
+    return (
+      <ButtonDisabled {...props} margin={margin}>
+        {renderText(theme.colors.neutralTheme.write)}
+      </ButtonDisabled>
+    );
+  }
+
   switch (type) {
     case theme.buttons.buttonsTheme.secondary:
       return (
-        <ButtonSecondary margin={margin} {...props}>
-          <Text type={textTypes.BUTTON_LIGHT} color={theme.colors.mainTheme.primary}>
-            {title}
-          </Text>
+        <ButtonSecondary {...props} margin={margin} onPress={handleOnPress}>
+          {renderText(theme.colors.mainTheme.primary)}
         </ButtonSecondary>
       );
     case theme.buttons.buttonsTheme.primary:
     default:
       return (
-        <ContainerButtom margin={margin} {...props}>
+        <ContainerButtom {...props} margin={margin} onPress={handleOnPress}>
           <GradientButton
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             colors={[theme.colors.purpleTheme.purple80, theme.colors.pinkTheme.pink80]}
           >
-            <Text type={textTypes.BUTTON_LIGHT} color={theme.colors.neutralTheme.write}>
-              {title}
-            </Text>
+            {renderText(theme.colors.neutralTheme.write)}
           </GradientButton>
         </ContainerButtom>
       );
