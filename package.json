@@ -15,6 +15,7 @@
     "@react-native-community/cli-doctor": "^11.3.3",
     "react": "18.2.0",
     "react-native": "0.72.0",
+    "react-native-linear-gradient": "^2.7.3",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
