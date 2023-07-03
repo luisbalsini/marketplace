@@ -4,6 +4,7 @@ import { ContainerLogin } from '../styles/login.style';
 import Input from '../../../shared/components/input/input';
 import Button from '../../../shared/components/buttom/buttom';
 import { theme } from '../../../shared/themes/theme';
+import { Icon } from '../../../shared/components/icon/icon';
 
 const Login = () => {
   const handleOnPress = () => {
@@ -13,11 +14,8 @@ const Login = () => {
   return (
     <View>
       <ContainerLogin>
-        <Input
-          placeholder="Digite seu email"
-          // errorMessage="Usuario ou senha inválidos"
-          title="Email"
-        />
+        <Icon name="home3" size={30} color="#000" />
+        <Input placeholder="Digite seu email" title="Email" />
         <Button
           type={theme.buttons.buttonsTheme.primary}
           margin="16px"
