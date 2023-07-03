@@ -1,6 +1,6 @@
-import React from 'react';
-import { ContainerInput } from './input.style';
-import { TextInputProps } from 'react-native';
+import React, { useState } from 'react';
+import { ContainerInput, IconEye } from './input.style';
+import { TextInputProps, View } from 'react-native';
 import { DisplayFlexColumn } from '../globalstyles/globalView.style';
 import { theme } from '../../themes/theme';
 import { textTypes } from '../text/textTypes';
@@ -9,11 +9,19 @@ import Text from '../text/text';
 interface InputProps extends TextInputProps {
   title?: string;
   errorMessage?: string;
+  secureTextEntry?: boolean;
+  margin?: string;
 }
 
-const Input = ({ title, errorMessage, ...props }: InputProps) => {
+const Input = ({ margin, secureTextEntry, title, errorMessage, ...props }: InputProps) => {
+  const [currentSecure, setCurrentSecure] = useState(!!secureTextEntry);
+
+  const handleOnPressEye = () => {
+    setCurrentSecure((current) => !current);
+  };
+
   return (
-    <DisplayFlexColumn>
+    <DisplayFlexColumn margin={margin}>
       {title && (
         <Text
           margin="0px 0px 4px 8px"
@@ -23,7 +31,22 @@ const Input = ({ title, errorMessage, ...props }: InputProps) => {
           {title}
         </Text>
       )}
-      <ContainerInput isError={errorMessage} {...props} />
+      <View>
+        <ContainerInput
+          hasSecureTextEntry={secureTextEntry}
+          secureTextEntry={currentSecure}
+          isError={errorMessage}
+          {...props}
+        />
+        {secureTextEntry && (
+          <IconEye
+            name={currentSecure ? 'eye' : 'eye-bloched'}
+            onPress={handleOnPressEye}
+            size={20}
+            color="#000"
+          />
+        )}
+      </View>
       {errorMessage && (
         <Text
           margin="4px 0px 0px 8px"
