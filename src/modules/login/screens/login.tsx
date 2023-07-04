@@ -4,10 +4,17 @@ import { ContainerLogin, ImageLogo } from '../styles/login.style';
 import Input from '../../../shared/components/input/input';
 import Button from '../../../shared/components/buttom/buttom';
 import { theme } from '../../../shared/themes/theme';
+import axios from 'axios';
 
 const Login = () => {
-  const handleOnPress = () => {
+  const handleOnPress = async () => {
     console.log('clicou');
+
+    // MUITO IMPORTANTE PARA O AXIOS MOBILE FUNCIONAR O APP
+    // MOBILE E O PC DEVELOP PRECISAM ESTAR NA MESMA REDE
+    const returnApi = await axios.get('http://10.1.0.112:3000/correios/01029-010');
+
+    console.log('retornoAxios', returnApi);
   };
 
   return (
