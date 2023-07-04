@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@react-native-community/cli-doctor": "^11.3.3",
+    "axios": "^1.4.0",
     "react": "18.2.0",
     "react-native": "0.72.0",
     "react-native-linear-gradient": "^2.7.3",

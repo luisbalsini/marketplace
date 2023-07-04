@@ -4,7 +4,6 @@ import { ContainerLogin, ImageLogo } from '../styles/login.style';
 import Input from '../../../shared/components/input/input';
 import Button from '../../../shared/components/buttom/buttom';
 import { theme } from '../../../shared/themes/theme';
-// import { Icon } from '../../../shared/components/icon/icon';
 
 const Login = () => {
   const handleOnPress = () => {
@@ -15,7 +14,6 @@ const Login = () => {
     <View>
       <ContainerLogin>
         <ImageLogo resizeMode="center" source={require('../../../assets/images/logo.png')} />
-        {/* <Icon name="home3" size={35} color="#000" /> */}
         <Input margin="0px 0px 8px 0px" placeholder="Digite seu email" title="Email" />
         <Input secureTextEntry placeholder="Digite sua senha" title="Senha" />
         <Button
