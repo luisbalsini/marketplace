@@ -1,28 +1,18 @@
 import { useState } from 'react';
 import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
-import { connectionAPIPost } from '../../../shared/functions/connection/connectionAPI';
+import { useRequest } from '../../../shared/hooks/useRequest';
 
 export const useLogin = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [loading, setLoding] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const { authRequest, errorMessage, loading, user, setErrorMessage } = useRequest();
 
+  console.log('user', user);
   const handleOnPress = async () => {
-    setLoding(true);
-
-    // MUITO IMPORTANTE PARA O AXIOS MOBILE FUNCIONAR O APP
-    // MOBILE E O PC DEVELOP PRECISAM ESTAR NA MESMA REDE
-    // const returnApi = await axios.get('http://10.1.0.112:3000/correios/01029-010');
-    const returnApi = await connectionAPIPost('http://10.1.0.112:3000/auth', {
+    authRequest({
       email,
       password,
-    }).catch(() => {
-      setErrorMessage('Usuario ou senha inválidos !');
     });
-    console.log('retornoAxios', returnApi);
-    setLoding(false);
-    console.log('clicou');
   };
 
   const handleOnChangeEmail = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {

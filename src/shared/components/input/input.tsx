@@ -40,7 +40,7 @@ const Input = ({ margin, secureTextEntry, title, errorMessage, ...props }: Input
         />
         {secureTextEntry && (
           <IconEye
-            name={currentSecure ? 'eye' : 'eye-bloched'}
+            name={currentSecure ? 'eye' : 'eye-blocked'}
             onPress={handleOnPressEye}
             size={20}
             color="#000"
