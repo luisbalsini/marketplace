@@ -13,11 +13,13 @@
   },
   "dependencies": {
     "@react-native-community/cli-doctor": "^11.3.3",
+    "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "react": "18.2.0",
     "react-native": "0.72.0",
     "react-native-linear-gradient": "^2.7.3",
     "react-native-vector-icons": "^9.2.0",
+    "react-redux": "^8.1.1",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
