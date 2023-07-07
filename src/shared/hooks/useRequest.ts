@@ -3,9 +3,11 @@ import { RequestLogin } from '../types/requestLogin';
 import { connectionAPIPost } from '../functions/connection/connectionAPI';
 import { returnLogin } from '../types/returnLogin';
 import { useUserReducer } from '../../store/reducers/userReducer/useUserReducer';
+import { useGlobalReducer } from '../../store/reducers/globalReducer/useGlobalReducer';
 
 export const useRequest = () => {
   const { setUser } = useUserReducer();
+  const { setModal } = useGlobalReducer();
   const [loading, setLoding] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -21,7 +23,11 @@ export const useRequest = () => {
         console.log('User', result.user);
       })
       .catch(() => {
-        setErrorMessage('Usuario ou senha inválidos !');
+        setModal({
+          visible: true,
+          title: 'Erro',
+          text: 'Usuario ou senha inválidos !',
+        });
       });
 
     setLoding(false);

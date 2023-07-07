@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, ModalProps as ModalPropsReact, Modal as ModalReact } from 'react-native';
-import { ContainerModal, IconCloseModal } from './modal.style';
+import { ContainerModal } from './modal.style';
 import Text from '../text/text';
 import { theme } from '../../themes/theme';
 import { textTypes } from '../text/textTypes';
@@ -33,7 +33,7 @@ const Modal = ({ title, text, onCloseModal, ...props }: ModalProps) => {
         </Text>
         <Text color="#000">{text}</Text>
         <Button title="OK" onPress={onCloseModal} />
-        <IconCloseModal onPress={onCloseModal} name="cross" size={12} color="#000" />
+        {/* <IconCloseModal onPress={onCloseModal} name="cross" size={12} color="#000" /> */}
       </ContainerModal>
     </ModalReact>
   );

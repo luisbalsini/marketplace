@@ -10,15 +10,6 @@ export const ContainerModal = styled.View`
   border-top-right-radius: 16px;
   border-top-left-radius: 16px;
   padding: 16px;
-
-  /* shadow-color: ${theme.colors.neutralTheme.black}; */
-  shadow-offset: {
-    width: 0;
-    height: 0;
-  }
-  /* shadow-opacity: 1;
-  shadow-radius: 1px;
-  elevation: 10; */
 `;
 
 export const IconCloseModal = styled(Icon)`
