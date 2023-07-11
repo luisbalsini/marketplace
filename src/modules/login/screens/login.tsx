@@ -5,12 +5,15 @@ import Input from '../../../shared/components/input/input';
 import Button from '../../../shared/components/buttom/buttom';
 import { theme } from '../../../shared/themes/theme';
 import { useLogin } from '../hooks/useLogin';
-import { getAuthorizationToken } from '../../../shared/functions/connection/auth';
-import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
-import { MenuUrl } from '../../../shared/enums/menuUrl.enum';
+// import { connectionAPIGet } from '../../../shared/functions/connection/connectionAPI';
+// import { userType } from '../../../shared/types/userType';
+// import { URL_USER } from '../../../shared/constants/urls';
+// import { getAuthorizationToken } from '../../../shared/functions/connection/auth';
+// import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
+// import { MenuUrl } from '../../../shared/enums/menuUrl.enum';
 
 const Login = () => {
-  const { navigate } = useNavigation<NavigationProp<ParamListBase>>();
+  // const { navigate } = useNavigation<NavigationProp<ParamListBase>>();
   const {
     email,
     password,
@@ -23,10 +26,15 @@ const Login = () => {
 
   useEffect(() => {
     const test = async () => {
-      const token = await getAuthorizationToken();
-      if (token) {
-        navigate(MenuUrl.HOME);
-      }
+      // const token = await getAuthorizationToken();
+      // if (token) {
+      //   navigate(MenuUrl.HOME);
+      // }
+      // const resultback = await connectionAPIGet<userType>(URL_USER).catch(() => undefined);
+      // console.log('connectionAPIget', resultback);
+      // if (resultback) {
+      //   navigate(MenuUrl.HOME);
+      // }
     };
     test();
   }, []);
