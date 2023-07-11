@@ -1,6 +1,6 @@
 import { userType } from './userType';
 
 export interface returnLogin {
-  acessToken: string;
+  accessToken: string;
   user: userType;
 }

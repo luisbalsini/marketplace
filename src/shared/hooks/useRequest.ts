@@ -6,6 +6,7 @@ import { useUserReducer } from '../../store/reducers/userReducer/useUserReducer'
 import { useGlobalReducer } from '../../store/reducers/globalReducer/useGlobalReducer';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { MenuUrl } from '../enums/menuUrl.enum';
+import { setAuthorizationToken } from '../functions/connection/auth';
 
 export const useRequest = () => {
   const { reset } = useNavigation<NavigationProp<ParamListBase>>();
@@ -22,6 +23,8 @@ export const useRequest = () => {
     // const returnApi = await axios.get('http://10.1.0.112:3000/correios/01029-010');
     await connectionAPIPost<returnLogin>('http://10.1.0.112:3000/auth', body)
       .then((result) => {
+        console.log(result);
+        setAuthorizationToken(result.accessToken);
         setUser(result.user);
         reset({
           index: 0,

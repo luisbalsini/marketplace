@@ -12,6 +12,7 @@
     "lint": "npm run lint:format && npm lint:fix"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.19.0",
     "@react-native-community/cli-doctor": "^11.3.3",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
