@@ -11,7 +11,8 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:react/jsx-runtime",
-    "@react-native-community"
+    "@react-native-community",
+    "react-hooks/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -20,12 +21,15 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "react-native", "prettier", "simple-import-sort"],
+  "plugins": ["react", "react-native", "prettier", "simple-import-sort", "react-hooks"],
   "rules": {
     "prettier/prettier": "error",
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
     "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "eslint-disable-next-line react-hooks/exhaustive-deps": "off",
     //ajustar para não passar erros com react-anvigation
     "react/prop-types": ["error", { "ignore": ["navigation", "navigate "] }],
 
