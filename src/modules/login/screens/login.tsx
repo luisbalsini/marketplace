@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { ContainerLogin, ImageLogo } from '../styles/login.style';
 import Input from '../../../shared/components/input/input';
 import Button from '../../../shared/components/buttom/buttom';
 import { theme } from '../../../shared/themes/theme';
 import { useLogin } from '../hooks/useLogin';
+import Text from '../../../shared/components/text/text';
+import { textTypes } from '../../../shared/components/text/textTypes';
 // import { connectionAPIGet } from '../../../shared/functions/connection/connectionAPI';
 // import { userType } from '../../../shared/types/userType';
 // import { URL_USER } from '../../../shared/constants/urls';
@@ -22,6 +24,7 @@ const Login = () => {
     handleOnPress,
     handleOnChangeEmail,
     handleOnChangePassword,
+    handleGoToCreateUser,
   } = useLogin();
 
   useEffect(() => {
@@ -59,9 +62,18 @@ const Login = () => {
           placeholder="Digite sua senha"
           title="Senha"
         />
+        <TouchableOpacity onPress={handleGoToCreateUser}>
+          <Text
+            margin="16px"
+            color={theme.colors.mainTheme.primary}
+            type={textTypes.PARAGRAPH_SEMI_BOLD}
+          >
+            Cadastrar Usuario
+          </Text>
+        </TouchableOpacity>
+
         <Button
           type={theme.buttons.buttonsTheme.primary}
-          margin="16px"
           title="Entrar"
           onPress={handleOnPress}
           loading={loading}
