@@ -1,8 +1,18 @@
+import React from 'react';
 import Text from '../../../shared/components/text/text';
+import Button from '../../../shared/components/buttom/buttom';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
+import { logout } from '../../../shared/functions/connection/auth';
+import { View } from 'react-native';
 
 const Home = () => {
-  // eslint-disable-next-line react/react-in-jsx-scope
-  return <Text>HOME</Text>;
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  return (
+    <View>
+      <Text>HOME</Text>
+      <Button title="SAIR" onPress={() => logout(navigation)} />
+    </View>
+  );
 };
 
 export default Home;
