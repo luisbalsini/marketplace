@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createUserType } from '../../../shared/types/createUserType';
 import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { useRequest } from '../../../shared/hooks/useRequest';
@@ -10,6 +10,7 @@ import { MenuUrl } from '../../../shared/enums/menuUrl.enum';
 export const useCreateUser = () => {
   const { reset } = useNavigation<NavigationProp<ParamListBase>>();
   const { request, loading } = useRequest();
+  const [disabled, setDisabled] = useState<boolean>(true);
   const [createUser, setCreateUser] = useState<createUserType>({
     confirmPassword: '',
     cpf: '',
@@ -18,6 +19,21 @@ export const useCreateUser = () => {
     password: '',
     phone: '',
   });
+
+  useEffect(() => {
+    if (
+      createUser.name !== '' &&
+      createUser.phone !== '' &&
+      createUser.email !== '' &&
+      createUser.cpf !== '' &&
+      createUser.password !== '' &&
+      createUser.password === createUser.confirmPassword
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [createUser]);
 
   const handleCreateUser = async () => {
     const resultCreateUser = await request({
@@ -39,15 +55,17 @@ export const useCreateUser = () => {
     event: NativeSyntheticEvent<TextInputChangeEventData>,
     name: string
   ) => {
+    const { text } = event.nativeEvent;
     setCreateUser((currentCreateUser) => ({
       ...currentCreateUser,
-      [name]: event.nativeEvent.text,
+      [name]: text,
     }));
   };
 
   return {
     createUser,
     loading,
+    disabled,
     handleOnChangeInput,
     handleCreateUser,
   };
