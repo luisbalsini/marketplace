@@ -58,18 +58,6 @@ export const useCreateUser = () => {
     name: string
   ) => {
     let text = event.nativeEvent.text;
-    switch (name) {
-      case 'cpf':
-        text = insertMaskInCpf(text);
-        break;
-
-      case 'phone':
-        text = insertMaskInPhone(text);
-        break;
-
-      default:
-        break;
-    }
     setCreateUser((currentCreateUser) => ({
       ...currentCreateUser,
       [name]: text,
