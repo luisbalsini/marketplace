@@ -52,14 +52,18 @@ const TabNavigation = () => {
         },
       })}
     >
-      <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen
-        name="Orders"
+        name={MenuUrl.HOME_TAB}
+        component={Home}
+        options={{ title: 'Home', headerShown: false }}
+      />
+      <Tab.Screen
+        name={MenuUrl.ORDERS}
         component={Orders}
         options={{ title: 'Pedidos', headerShown: false }}
       />
       <Tab.Screen
-        name="Profile"
+        name={MenuUrl.PROFILE}
         component={Profile}
         options={{ title: 'Perfil', headerShown: false }}
       />
@@ -76,7 +80,6 @@ const Navigation = () => {
       <Stack.Navigator>
         <Stack.Screen name={MenuUrl.SPLASH} component={Splash} options={{ headerShown: false }} />
         <Stack.Screen name={MenuUrl.LOGIN} component={Login} options={{ headerShown: false }} />
-        {/* <Stack.Screen name={MenuUrl.HOME} component={Home} options={{ title: 'Home' }} /> */}
         <Stack.Screen
           name={MenuUrl.CREATE_USER}
           component={CreateUser}
