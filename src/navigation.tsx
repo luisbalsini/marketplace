@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, ParamListBase, RouteProp } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from './modules/home';
@@ -41,8 +41,15 @@ const TabNavigation = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => renderTabBarIcon(color, size, route),
-        tabBarActiveTintColor: theme.colors.mainTheme.primary,
+        tabBarActiveTintColor: theme.colors.purpleTheme.purple80,
         tabBarInactiveTintColor: theme.colors.grayTheme.gray80,
+        tabBarLabelStyle: {
+          marginBottom: 8,
+        },
+        tabBarStyle: {
+          height: 60,
+          padding: 8,
+        },
       })}
     >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
