@@ -6,4 +6,5 @@ export enum MenuUrl {
   CREATE_USER = 'CreateUser',
   ORDERS = 'Orders',
   PROFILE = 'Profile',
+  PRODUCT = 'Product',
 }

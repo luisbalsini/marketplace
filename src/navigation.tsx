@@ -13,6 +13,7 @@ import { Icon } from './shared/components/icon/icon';
 import { theme } from './shared/themes/theme';
 import Profile from './modules/profile';
 import Orders from './modules/orders';
+import Product from './modules/product';
 
 const TabNavigation = () => {
   const renderTabBarIcon = (
@@ -80,6 +81,7 @@ const Navigation = () => {
       <Stack.Navigator>
         <Stack.Screen name={MenuUrl.SPLASH} component={Splash} options={{ headerShown: false }} />
         <Stack.Screen name={MenuUrl.LOGIN} component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name={MenuUrl.PRODUCT} component={Product} />
         <Stack.Screen
           name={MenuUrl.CREATE_USER}
           component={CreateUser}
