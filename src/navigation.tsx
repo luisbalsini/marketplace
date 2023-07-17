@@ -14,6 +14,7 @@ import { theme } from './shared/themes/theme';
 import Profile from './modules/profile';
 import Orders from './modules/orders';
 import Product from './modules/product';
+import Cart from './modules/cart';
 
 const TabNavigation = () => {
   const renderTabBarIcon = (
@@ -24,12 +25,16 @@ const TabNavigation = () => {
     let iconName: string;
 
     switch (route.name) {
-      case 'Home':
+      case MenuUrl.HOME:
         iconName = 'home';
         break;
-      case 'Orders':
+      case MenuUrl.CART:
         iconName = 'cart';
         break;
+      case MenuUrl.ORDERS:
+        iconName = 'ticket';
+        break;
+      case MenuUrl.PROFILE:
       default:
         iconName = 'profile';
         break;
@@ -57,6 +62,11 @@ const TabNavigation = () => {
         name={MenuUrl.HOME_TAB}
         component={Home}
         options={{ title: 'Home', headerShown: false }}
+      />
+      <Tab.Screen
+        name={MenuUrl.CART}
+        component={Cart}
+        options={{ title: 'Carrinho', headerShown: false }}
       />
       <Tab.Screen
         name={MenuUrl.ORDERS}
