@@ -15,8 +15,6 @@ const Product = () => {
   const { params } = useRoute<RouteProp<Record<string, ProductParams>>>();
   const { product } = params;
 
-  console.log('params', params);
-
   return <Text color={theme.colors.neutralTheme.black}>{product.name}</Text>;
 };
 
