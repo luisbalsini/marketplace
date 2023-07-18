@@ -25,8 +25,8 @@ const TabNavigation = () => {
     let iconName: string;
 
     switch (route.name) {
-      case MenuUrl.HOME:
-        iconName = 'home';
+      case MenuUrl.HOME_TAB:
+        iconName = 'home3';
         break;
       case MenuUrl.CART:
         iconName = 'cart';
