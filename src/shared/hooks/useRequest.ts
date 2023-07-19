@@ -11,11 +11,11 @@ import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/
 import { MenuUrl } from '../enums/menuUrl.enum';
 import { setAuthorizationToken } from '../functions/connection/auth';
 
-interface requestProps<T> {
+interface requestProps<T, B = unknown> {
   url: string;
   method: methodType;
   saveGlobal?: (object: T) => void;
-  body?: unknown;
+  body?: B;
   message?: string;
 }
 
@@ -26,15 +26,15 @@ export const useRequest = () => {
   const [loading, setLoding] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const request = async <T>({
+  const request = async <T, B = unknown>({
     url,
     method,
     saveGlobal,
     body,
     message,
-  }: requestProps<T>): Promise<T | undefined> => {
+  }: requestProps<T | undefined, B>): Promise<T | undefined> => {
     setLoding(true);
-    const returnObject: T | undefined = await ConnectionAPI.connect<T>(url, method, body)
+    const returnObject: T | undefined = await ConnectionAPI.connect<T, B>(url, method, body)
       .then((result) => {
         if (saveGlobal) {
           saveGlobal(result);
