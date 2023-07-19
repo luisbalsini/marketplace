@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
-import Text from '../../../shared/components/text/text';
-import { FlatList, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, NativeSyntheticEvent, TextInputChangeEventData, View } from 'react-native';
 import { useProductReducer } from '../../../store/reducers/productReducer/useProductReducer';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import { URL_PRODUCT } from '../../../shared/constants/urls';
 import { MethodEnum } from '../../../enums/methods.enum';
 import { ProductType } from '../../../shared/types/productType';
-// import { useNavigation } from '@react-navigation/native';
-import { theme } from '../../../shared/themes/theme';
-// import { MenuUrl } from '../../../shared/enums/menuUrl.enum';
-// import { ProductNavigationProp } from '../../product/screens/product';
 import ProductThumbnail from '../../../shared/components/productThumbnail/productThumbnail';
+import Input from '../../../shared/components/input/input';
+import { DisplayFlexColumn } from '../../../shared/components/globalstyles/globalView.style';
+import { ContainerHome } from '../styles/home.style';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
+import { MenuUrl } from '../../../shared/enums/menuUrl.enum';
 
 const Home = () => {
+  const [search, setSearch] = useState('');
+  const { navigate } = useNavigation<NavigationProp<ParamListBase>>();
   const { request } = useRequest();
   const { products, setProducts } = useProductReducer();
-  // const navigation = useNavigation<ProductNavigationProp>();
 
   useEffect(() => {
     request<ProductType[]>({
@@ -26,13 +27,26 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const handleGoToProduct = (product: ProductType) => {
-  //   navigation.navigate(MenuUrl.PRODUCT, { product });
-  // };
+  const handleGoToProduct = () => {
+    navigate(MenuUrl.SEARCH_PRODUCT);
+  };
+
+  const handleOnChangeSearch = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    const nE = event.nativeEvent;
+    setSearch(nE.text);
+  };
 
   return (
     <View>
-      <Text color={theme.colors.neutralTheme.black}>HOME</Text>
+      <ContainerHome>
+        <Input
+          onPressIconRight={handleGoToProduct}
+          value={search}
+          iconRight="search"
+          onChange={handleOnChangeSearch}
+        />
+      </ContainerHome>
+      <DisplayFlexColumn />
       <FlatList
         horizontal
         data={products}

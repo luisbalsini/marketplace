@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from 'react';
-import { ContainerInput, IconEye } from './input.style';
+import { ContainerInput, IconEye, IconSearch } from './input.style';
 import {
   NativeSyntheticEvent,
   TextInput,
@@ -20,10 +20,25 @@ interface InputProps extends TextInputProps {
   secureTextEntry?: boolean;
   margin?: string;
   type?: 'cel-phone' | 'cpf';
+  iconRight?: string;
+  onPressIconRight?: () => void;
 }
 
 const Input = forwardRef<TextInput, InputProps>(
-  ({ margin, secureTextEntry, title, errorMessage, onChange, type, ...props }: InputProps, ref) => {
+  (
+    {
+      margin,
+      secureTextEntry,
+      title,
+      errorMessage,
+      onChange,
+      type,
+      iconRight,
+      onPressIconRight,
+      ...props
+    }: InputProps,
+    ref
+  ) => {
     const [currentSecure, setCurrentSecure] = useState(!!secureTextEntry);
 
     const handleOnChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
@@ -82,6 +97,9 @@ const Input = forwardRef<TextInput, InputProps>(
               size={20}
               color="#000"
             />
+          )}
+          {iconRight && (
+            <IconSearch color="#000" size={18} name="search" onPress={onPressIconRight} />
           )}
         </View>
         {errorMessage && (

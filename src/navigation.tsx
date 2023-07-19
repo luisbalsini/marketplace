@@ -15,6 +15,7 @@ import Profile from './modules/profile';
 import Orders from './modules/orders';
 import Product from './modules/product';
 import Cart from './modules/cart';
+import SearchProduct from './modules/searchProduct';
 
 const TabNavigation = () => {
   const renderTabBarIcon = (
@@ -28,11 +29,14 @@ const TabNavigation = () => {
       case MenuUrl.HOME_TAB:
         iconName = 'home3';
         break;
-      case MenuUrl.CART:
-        iconName = 'cart';
-        break;
       case MenuUrl.ORDERS:
         iconName = 'ticket';
+        break;
+      case MenuUrl.SEARCH_PRODUCT:
+        iconName = 'search';
+        break;
+      case MenuUrl.CART:
+        iconName = 'cart';
         break;
       case MenuUrl.PROFILE:
       default:
@@ -62,6 +66,11 @@ const TabNavigation = () => {
         name={MenuUrl.HOME_TAB}
         component={Home}
         options={{ title: 'Home', headerShown: false }}
+      />
+      <Tab.Screen
+        name={MenuUrl.SEARCH_PRODUCT}
+        component={SearchProduct}
+        options={{ title: 'Buscar', headerShown: false }}
       />
       <Tab.Screen
         name={MenuUrl.CART}
