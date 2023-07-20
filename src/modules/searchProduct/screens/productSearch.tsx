@@ -5,7 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import { useProductReducer } from '../../../store/reducers/productReducer/useProductReducer';
-import { URL_PRODUCT, URL_PRODUCT_PAGE } from '../../../shared/constants/urls';
+import { URL_PRODUCT_PAGE } from '../../../shared/constants/urls';
 import { MethodEnum } from '../../../enums/methods.enum';
 import { PaginationType } from '../../../shared/types/paginationType';
 import { ProductType } from '../../../shared/types/productType';
@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import ProductThumbnail from '../../../shared/components/productThumbnail/productThumbnail';
 import { ActivityIndicatorButton } from '../../../shared/components/buttom/buttom.style';
+import { SearchProductContainer, SearchProductScrollView } from '../styles/productSearch.style';
 
 export type SearchProductNavigationProp = NativeStackNavigationProp<
   Record<string, SearchProductParams>
@@ -69,17 +70,19 @@ const SearchProduct = () => {
   };
 
   return (
-    <>
+    <SearchProductContainer>
       <Input onChange={handleOnChangeInput} value={value} iconRight="search" />
       {searchProducts && searchProducts.data && (
         <ScrollView onScroll={handleScroll}>
-          {searchProducts.data.map((product) => (
-            <ProductThumbnail key={product.id} product={product} />
-          ))}
+          <SearchProductScrollView>
+            {searchProducts.data.map((product) => (
+              <ProductThumbnail margin="4px 0px" key={product.id} product={product} />
+            ))}
+          </SearchProductScrollView>
         </ScrollView>
       )}
       {loading && <ActivityIndicatorButton color={theme.colors.mainTheme.primary} />}
-    </>
+    </SearchProductContainer>
   );
 };
 
