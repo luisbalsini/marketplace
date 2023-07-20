@@ -1,17 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import Text from '../../../shared/components/text/text';
 import { theme } from '../../../shared/themes/theme';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import { useProductReducer } from '../../../store/reducers/productReducer/useProductReducer';
-import { URL_PRODUCT_PAGE } from '../../../shared/constants/urls';
+import { URL_PRODUCT, URL_PRODUCT_PAGE } from '../../../shared/constants/urls';
 import { MethodEnum } from '../../../enums/methods.enum';
 import { PaginationType } from '../../../shared/types/paginationType';
 import { ProductType } from '../../../shared/types/productType';
 import Input from '../../../shared/components/input/input';
-import { NativeSyntheticEvent, ScrollView, TextInputChangeEventData } from 'react-native';
+import {
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  TextInputChangeEventData,
+} from 'react-native';
 import ProductThumbnail from '../../../shared/components/productThumbnail/productThumbnail';
+import { ActivityIndicatorButton } from '../../../shared/components/buttom/buttom.style';
 
 export type SearchProductNavigationProp = NativeStackNavigationProp<
   Record<string, SearchProductParams>
@@ -22,45 +28,57 @@ export interface SearchProductParams {
 }
 
 const SearchProduct = () => {
-  const { searchProducts, setSearchProducts } = useProductReducer();
+  const { searchProducts, setSearchProducts, insertSearchProducts } = useProductReducer();
   const { params } = useRoute<RouteProp<Record<string, SearchProductParams>>>();
-  const { request } = useRequest();
+  const { request, loading } = useRequest();
   const [value, setValue] = useState(params?.search || '');
 
   useEffect(() => {
-    setValue(params?.search);
+    setValue(params?.search || '');
   }, [params]);
 
   useEffect(() => {
-    if (value) {
-      request<PaginationType<ProductType[]>>({
-        url: `${URL_PRODUCT_PAGE}?search=${value}`,
-        method: MethodEnum.GET,
-        saveGlobal: setSearchProducts,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    request<PaginationType<ProductType[]>>({
+      url: `${URL_PRODUCT_PAGE}?search=${value}`,
+      method: MethodEnum.GET,
+      saveGlobal: setSearchProducts,
+    });
   }, [value]);
 
-  const handleOnChangeInput = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    const nE = event.nativeEvent;
-    setValue(nE.text);
+  const findNewPage = () => {
+    if (searchProducts && searchProducts.meta.currentPage < searchProducts.meta.totalPages) {
+      request<PaginationType<ProductType[]>>({
+        url: `${URL_PRODUCT_PAGE}?search=${value}&page=${searchProducts.meta.currentPage + 1}`,
+        method: MethodEnum.GET,
+        saveGlobal: insertSearchProducts,
+      });
+    }
   };
 
-  console.log('searchproduct', searchProducts);
+  const handleOnChangeInput = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    setValue(event.nativeEvent.text);
+  };
+
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
+    const isEndScroll = contentOffset.y >= contentSize.height - layoutMeasurement.height;
+
+    if (isEndScroll && !loading) {
+      findNewPage();
+    }
+  };
 
   return (
     <>
       <Input onChange={handleOnChangeInput} value={value} iconRight="search" />
       {searchProducts && searchProducts.data && (
-        <ScrollView>
+        <ScrollView onScroll={handleScroll}>
           {searchProducts.data.map((product) => (
             <ProductThumbnail key={product.id} product={product} />
           ))}
         </ScrollView>
-        // <Text color={theme.colors.neutralTheme.black}>Tem produto</Text>
       )}
-      <Text color={theme.colors.neutralTheme.black}>Todos os produtos</Text>
+      {loading && <ActivityIndicatorButton color={theme.colors.mainTheme.primary} />}
     </>
   );
 };

@@ -7,15 +7,8 @@ import { theme } from '../../../shared/themes/theme';
 import { useLogin } from '../hooks/useLogin';
 import Text from '../../../shared/components/text/text';
 import { textTypes } from '../../../shared/components/text/textTypes';
-// import { connectionAPIGet } from '../../../shared/functions/connection/connectionAPI';
-// import { userType } from '../../../shared/types/userType';
-// import { URL_USER } from '../../../shared/constants/urls';
-// import { getAuthorizationToken } from '../../../shared/functions/connection/auth';
-// import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
-// import { MenuUrl } from '../../../shared/enums/menuUrl.enum';
 
 const Login = () => {
-  // const { navigate } = useNavigation<NavigationProp<ParamListBase>>();
   const {
     email,
     password,
@@ -26,21 +19,6 @@ const Login = () => {
     handleOnChangePassword,
     handleGoToCreateUser,
   } = useLogin();
-
-  useEffect(() => {
-    const test = async () => {
-      // const token = await getAuthorizationToken();
-      // if (token) {
-      //   navigate(MenuUrl.HOME);
-      // }
-      // const resultback = await connectionAPIGet<userType>(URL_USER).catch(() => undefined);
-      // console.log('connectionAPIget', resultback);
-      // if (resultback) {
-      //   navigate(MenuUrl.HOME);
-      // }
-    };
-    test();
-  }, []);
 
   return (
     <View>

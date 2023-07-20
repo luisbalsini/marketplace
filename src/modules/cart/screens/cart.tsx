@@ -20,8 +20,6 @@ const Cart = () => {
     });
   }, []);
 
-  console.log('cart', cart);
-
   return <Text color={theme.colors.neutralTheme.black}>Carrinho</Text>;
 };
 

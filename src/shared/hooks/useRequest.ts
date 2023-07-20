@@ -70,14 +70,12 @@ export const useRequest = () => {
     // const returnApi = await axios.get('http://10.1.0.112:3000/correios/01029-010');
     await connectionAPIPost<returnLogin>('http://10.1.0.112:3000/auth', body)
       .then((result) => {
-        console.log(result);
         setAuthorizationToken(result.accessToken);
         setUser(result.user);
         reset({
           index: 0,
           routes: [{ name: MenuUrl.HOME }],
         });
-        console.log('User', result.user);
       })
       .catch(() => {
         setModal({
