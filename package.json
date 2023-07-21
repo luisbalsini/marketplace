@@ -9,7 +9,8 @@
     "test": "jest",
     "lint:fix": "eslint ./src --ext .jsx,.js,.tsx --fix --ignore-path ./.gitignore --max-warnings=0",
     "lint:format": "prettier --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
-    "lint": "npm run lint:format && npm lint:fix"
+    "lint": "npm run lint:format && npm lint:fix",
+    "test:cov": "jest --coverage"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.19.0",
@@ -35,6 +36,7 @@
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.6",
     "@tsconfig/react-native": "^3.0.0",
+    "@types/jest": "^29.5.3",
     "@types/metro-config": "^0.76.3",
     "@types/react": "^18.2.14",
     "@types/react-native-vector-icons": "^6.4.13",
