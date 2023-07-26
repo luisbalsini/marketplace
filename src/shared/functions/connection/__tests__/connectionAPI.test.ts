@@ -12,12 +12,12 @@ import { MethodEnum } from '../../../../enums/methods.enum';
 import { ERROR_ACCESS_DANIED, ERROR_CONNECTION } from '../../../constants/errosContants';
 
 const mockAxios = new MockAdapter(axios);
-const token = 'token_mock';
+const mockToken = 'token_mock';
 const mockReturnValue = 'mockReturnValue';
 const BODY_MOCK = { name: 'test' };
 
 jest.mock('../auth', () => ({
-  getAuthorizationToken: () => token,
+  getAuthorizationToken: () => mockToken,
 }));
 
 describe('ConnectionAPI', () => {
@@ -118,6 +118,21 @@ describe('ConnectionAPI', () => {
       expect(ConnectionAPI.connect(URL_CART, MethodEnum.GET)).rejects.toThrowError(
         Error(ERROR_CONNECTION)
       );
+    });
+  });
+
+  describe('test call', () => {
+    it('should header send authorization', async () => {
+      const spyAxios = jest.spyOn(axios, 'get');
+
+      mockAxios.onGet(URL_CART).reply(200, mockReturnValue);
+
+      await ConnectionAPI.connect(URL_CART, MethodEnum.GET);
+
+      expect(spyAxios.mock.calls[0][1]?.headers).toEqual({
+        Authorization: mockToken,
+        'Content-Type': 'application/json',
+      });
     });
   });
 });
