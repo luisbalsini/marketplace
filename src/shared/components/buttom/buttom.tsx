@@ -10,6 +10,7 @@ import { TouchableOpacityProps } from 'react-native';
 import Text from '../text/text';
 import { theme } from '../../themes/theme';
 import { textTypes } from '../text/textTypes';
+import { buttonTestId } from './__tests__/button.testid';
 
 interface ButtomProps extends TouchableOpacityProps {
   title: string;
@@ -32,7 +33,12 @@ const Button = ({ title, margin, type, disabled, loading, onPress, ...props }: B
       <Text type={textTypes.BUTTON_SEMI_BOLD} color={color}>
         {title}
       </Text>
-      {loading && <ActivityIndicatorButton color={theme.colors.neutralTheme.write} />}
+      {loading && (
+        <ActivityIndicatorButton
+          testID={buttonTestId.BUTTON_TEST_ID}
+          color={theme.colors.neutralTheme.write}
+        />
+      )}
     </>
   );
 
