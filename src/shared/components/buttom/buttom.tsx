@@ -10,7 +10,7 @@ import { TouchableOpacityProps } from 'react-native';
 import Text from '../text/text';
 import { theme } from '../../themes/theme';
 import { textTypes } from '../text/textTypes';
-import { buttonTestId } from './__tests__/button.testid';
+import { buttonTestId } from './__mocks__/button.testid';
 
 interface ButtomProps extends TouchableOpacityProps {
   title: string;

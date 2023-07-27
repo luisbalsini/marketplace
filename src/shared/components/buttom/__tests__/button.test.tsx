@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import { View as MockView } from 'react-native';
 import Button from '../buttom';
-import { buttonTestId } from './button.testid';
+import { buttonTestId } from '../__mocks__/button.testid';
 
 const mockOnPress = jest.fn();
 
