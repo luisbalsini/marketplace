@@ -30,12 +30,12 @@ const Button = ({ title, margin, type, disabled, loading, onPress, ...props }: B
 
   const renderText = (color: string) => (
     <>
-      <Text type={textTypes.BUTTON_SEMI_BOLD} color={color}>
+      <Text testID={buttonTestId.BUTTON_TITLE} type={textTypes.BUTTON_SEMI_BOLD} color={color}>
         {title}
       </Text>
       {loading && (
         <ActivityIndicatorButton
-          testID={buttonTestId.BUTTON_TEST_ID}
+          testID={buttonTestId.BUTTON_DEFAULT}
           color={theme.colors.neutralTheme.write}
         />
       )}
@@ -44,7 +44,7 @@ const Button = ({ title, margin, type, disabled, loading, onPress, ...props }: B
 
   if (disabled) {
     return (
-      <ButtonDisabled {...props} margin={margin}>
+      <ButtonDisabled {...props} margin={margin} testID={buttonTestId.BUTTON_DISABLED}>
         {renderText(theme.colors.neutralTheme.write)}
       </ButtonDisabled>
     );
@@ -53,14 +53,24 @@ const Button = ({ title, margin, type, disabled, loading, onPress, ...props }: B
   switch (type) {
     case theme.buttons.buttonsTheme.secondary:
       return (
-        <ButtonSecondary {...props} margin={margin} onPress={handleOnPress}>
+        <ButtonSecondary
+          {...props}
+          margin={margin}
+          testID={buttonTestId.BUTTON_SECONDARY}
+          onPress={handleOnPress}
+        >
           {renderText(theme.colors.mainTheme.primary)}
         </ButtonSecondary>
       );
     case theme.buttons.buttonsTheme.primary:
     default:
       return (
-        <ContainerButtom {...props} margin={margin} onPress={handleOnPress}>
+        <ContainerButtom
+          {...props}
+          margin={margin}
+          testID={buttonTestId.BUTTON_DEFAULT}
+          onPress={handleOnPress}
+        >
           <GradientButton
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
