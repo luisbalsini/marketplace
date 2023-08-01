@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react-native';
 import { DEFAULT_CREATE_USER, useCreateUser } from '../useCreateUser';
+import { mockCreateUser } from '../../__mocks__/createUser.mock';
 
 const mockReset = jest.fn();
 const mockRequest = jest.fn();
@@ -17,14 +18,14 @@ jest.mock('../../../../shared/hooks/useRequest', () => ({
   }),
 }));
 
-describe('should change createUser after onChangeInput', () => {
+describe('useCreate', () => {
   it('should return create user default', () => {
     const { result } = renderHook(() => useCreateUser());
 
     expect(result.current.createUser).toEqual(DEFAULT_CREATE_USER);
   });
 
-  it('', () => {
+  it('should change createUser after onChangeInput', () => {
     const { result } = renderHook(() => useCreateUser());
     const mockText = 'deggsdgsdg';
     const event: any = {
@@ -37,5 +38,87 @@ describe('should change createUser after onChangeInput', () => {
     });
 
     expect(result.current.createUser.cpf).toEqual(mockText);
+  });
+
+  it('should set disabled after insert all data', () => {
+    const { result } = renderHook(() => useCreateUser());
+
+    act(() => {
+      result.current.handleOnChangeInput(
+        {
+          nativeEvent: {
+            text: mockCreateUser.confirmPassword,
+          },
+        } as any,
+        'confirmPassword'
+      );
+    });
+
+    expect(result.current.disabled).toEqual(true);
+
+    act(() => {
+      result.current.handleOnChangeInput(
+        {
+          nativeEvent: {
+            text: mockCreateUser.confirmPassword,
+          },
+        } as any,
+        'password'
+      );
+    });
+
+    expect(result.current.disabled).toEqual(true);
+
+    act(() => {
+      result.current.handleOnChangeInput(
+        {
+          nativeEvent: {
+            text: mockCreateUser.cpf,
+          },
+        } as any,
+        'cpf'
+      );
+    });
+
+    expect(result.current.disabled).toEqual(true);
+
+    act(() => {
+      result.current.handleOnChangeInput(
+        {
+          nativeEvent: {
+            text: mockCreateUser.email,
+          },
+        } as any,
+        'email'
+      );
+    });
+
+    expect(result.current.disabled).toEqual(true);
+
+    act(() => {
+      result.current.handleOnChangeInput(
+        {
+          nativeEvent: {
+            text: mockCreateUser.name,
+          },
+        } as any,
+        'name'
+      );
+    });
+
+    expect(result.current.disabled).toEqual(true);
+
+    act(() => {
+      result.current.handleOnChangeInput(
+        {
+          nativeEvent: {
+            text: mockCreateUser.phone,
+          },
+        } as any,
+        'phone'
+      );
+    });
+
+    expect(result.current.disabled).toEqual(false);
   });
 });
