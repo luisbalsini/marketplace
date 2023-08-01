@@ -121,4 +121,24 @@ describe('useCreate', () => {
 
     expect(result.current.disabled).toEqual(false);
   });
+
+  it('should call request in create user', () => {
+    const { result } = renderHook(() => useCreateUser());
+
+    act(() => {
+      result.current.handleCreateUser();
+    });
+
+    expect(mockRequest).toBeCalled();
+  });
+
+  it('should not call reset in create user if return undefined', () => {
+    const { result } = renderHook(() => useCreateUser());
+
+    act(() => {
+      result.current.handleCreateUser();
+    });
+
+    expect(mockReset).not.toBeCalled();
+  });
 });
