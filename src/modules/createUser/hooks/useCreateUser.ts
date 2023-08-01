@@ -11,18 +11,20 @@ import { validatePhone } from '../../../shared/functions/phone';
 import { validateEmail } from '../../../shared/functions/email';
 import { removeSpecialCharacters } from '../../../shared/functions/characters';
 
+export const DEFAULT_CREATE_USER = {
+  confirmPassword: '',
+  cpf: '',
+  email: '',
+  name: '',
+  password: '',
+  phone: '',
+};
+
 export const useCreateUser = () => {
   const { reset } = useNavigation<NavigationProp<ParamListBase>>();
   const { request, loading } = useRequest();
   const [disabled, setDisabled] = useState<boolean>(true);
-  const [createUser, setCreateUser] = useState<createUserType>({
-    confirmPassword: '',
-    cpf: '',
-    email: '',
-    name: '',
-    password: '',
-    phone: '',
-  });
+  const [createUser, setCreateUser] = useState<createUserType>(DEFAULT_CREATE_USER);
 
   useEffect(() => {
     if (
